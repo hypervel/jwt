@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Hypervel\JWT;
+namespace Hypervel\Jwt;
 
 use Hypervel\Contracts\Container\Container;
-use Hypervel\JWT\Contracts\BlacklistContract;
-use Hypervel\JWT\Contracts\ManagerContract;
-use Hypervel\JWT\Contracts\TemporalValidation;
-use Hypervel\JWT\Contracts\ValidationContract;
-use Hypervel\JWT\Exceptions\JWTException;
-use Hypervel\JWT\Exceptions\TokenBlacklistedException;
-use Hypervel\JWT\Exceptions\TokenExpiredException;
-use Hypervel\JWT\Providers\Lcobucci;
+use Hypervel\Jwt\Contracts\BlacklistContract;
+use Hypervel\Jwt\Contracts\ManagerContract;
+use Hypervel\Jwt\Contracts\TemporalValidation;
+use Hypervel\Jwt\Contracts\ValidationContract;
+use Hypervel\Jwt\Exceptions\JwtException;
+use Hypervel\Jwt\Exceptions\TokenBlacklistedException;
+use Hypervel\Jwt\Exceptions\TokenExpiredException;
+use Hypervel\Jwt\Providers\Lcobucci;
 use Hypervel\Support\Facades\Date;
 use Hypervel\Support\Manager;
 use Hypervel\Support\Str;
 use RuntimeException;
 
-class JWTManager extends Manager implements ManagerContract
+class JwtManager extends Manager implements ManagerContract
 {
     protected ?BlacklistContract $blacklist;
 
@@ -177,7 +177,7 @@ class JWTManager extends Manager implements ManagerContract
     public function invalidate(string $token, bool $forceForever = false): bool
     {
         if (! $this->blacklistEnabled) {
-            throw new JWTException('You must have the blacklist enabled to invalidate a token.');
+            throw new JwtException('You must have the blacklist enabled to invalidate a token.');
         }
 
         return call_user_func(
@@ -217,7 +217,7 @@ class JWTManager extends Manager implements ManagerContract
     protected function blacklist(): BlacklistContract
     {
         if ($this->blacklist === null) {
-            throw new JWTException('JWT blacklist is not configured.');
+            throw new JwtException('JWT blacklist is not configured.');
         }
 
         return $this->blacklist;

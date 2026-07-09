@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Hypervel\JWT;
+namespace Hypervel\Jwt;
 
 use Hypervel\Auth\AuthManager;
 use Hypervel\Cache\Repository as CacheRepository;
 use Hypervel\Contracts\Container\Container;
-use Hypervel\JWT\Console\JwtGenerateCertsCommand;
-use Hypervel\JWT\Console\JwtSecretCommand;
-use Hypervel\JWT\Contracts\BlacklistContract;
-use Hypervel\JWT\Http\Parser\AuthHeaders;
-use Hypervel\JWT\Http\Parser\Cookie;
-use Hypervel\JWT\Http\Parser\InputSource;
-use Hypervel\JWT\Http\Parser\Parser;
-use Hypervel\JWT\Storage\TaggedCache;
+use Hypervel\Jwt\Console\JwtGenerateCertsCommand;
+use Hypervel\Jwt\Console\JwtSecretCommand;
+use Hypervel\Jwt\Contracts\BlacklistContract;
+use Hypervel\Jwt\Http\Parser\AuthHeaders;
+use Hypervel\Jwt\Http\Parser\Cookie;
+use Hypervel\Jwt\Http\Parser\InputSource;
+use Hypervel\Jwt\Http\Parser\Parser;
+use Hypervel\Jwt\Storage\TaggedCache;
 use Hypervel\Support\ServiceProvider;
 use RuntimeException;
 
-class JWTServiceProvider extends ServiceProvider
+class JwtServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.
@@ -30,7 +30,7 @@ class JWTServiceProvider extends ServiceProvider
         // Hypervel intentionally keeps JWT as an array-based manager/guard package.
         // Upstream object/facade bindings hold mutable request state that does not
         // fit worker-lifetime singleton guards.
-        $this->app->singleton('jwt', fn ($app) => new JWTManager(
+        $this->app->singleton('jwt', fn ($app) => new JwtManager(
             $app,
             $app->make(ClaimFactory::class),
         ));

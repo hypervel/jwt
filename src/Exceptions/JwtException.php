@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Hypervel\JWT\Exceptions;
+namespace Hypervel\Jwt\Exceptions;
 
 use Exception;
 
-class JWTException extends Exception
+class JwtException extends Exception
 {
     protected $message = 'An error occurred';
 }
